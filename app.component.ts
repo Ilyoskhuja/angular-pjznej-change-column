@@ -9,16 +9,11 @@ import {
 
   FilterService
 } from '@syncfusion/ej2-angular-treegrid';
-// SelectionSettingsModel,
-// EditEventArgs,
-// EditSettingsModel,
+
 import { Treerow } from './treerow';
 import { v4 as uuidv4 } from 'uuid';
-import { getValue, isNullOrUndefined } from '@syncfusion/ej2-base';
 import { BeforeOpenCloseEventArgs } from '@syncfusion/ej2-inputs';
 import { DropDownList } from '@syncfusion/ej2-dropdowns';
-import { RowDataBoundEventArgs } from '@syncfusion/ej2-grids';
-import { ButtonComponent } from '@syncfusion/ej2-angular-buttons';
 
 import { Browser } from '@syncfusion/ej2-base';
 import { NumericTextBoxComponent } from '@syncfusion/ej2-angular-inputs';
@@ -144,25 +139,7 @@ public progressM: CheckBoxComponent;
   public filterSettings: Object;
   public dropDownFilter: DropDownList;
   public toolbar: string[];
-  public selectList = [
-    {
-      name: 'toto',
-      value: 'toto',
-    },
-    {
-      name: 'titi',
-      value: 'titi',
-    },
-    {
-      name: 'tata',
-      value: 'tata',
-    },
-    {
-      name: 'tutu',
-      value: 'tutu',
-    },
-  ];
-  // public editSettings: Object;
+  
   public listHeadersC: any = [
     {
       field: 'TaskID',
@@ -441,28 +418,15 @@ public progressM: CheckBoxComponent;
     if(data=='filtering')
    { this.filtering=false; }
   }
-  // addColumn() {
-  //   var column: any = { field: 'zzzzz', headerText: 'zzzzz', width: 50 };
-  //   this.treeColumns.push(column);
 
-  //   console.log("AddColumn:", this.treeColumns);
-  //   this.treegrid.refreshColumns();
-  // }
   deleteColumnX() {
     this.treegrid.columns.filter((i, x) => {
       if (i.field == this.columnField) {
         this.treegrid.columns.splice(x, 1);
         console.log('x:----', x);
-        //you can simply remove based on field name or an index of a column
       }
     });
-    // this.listHeadersC=this.listHeadersC.filter(r =>
-    //   r.field !== this.columnField
-    // );
-
-    // this.treegrid.columns.splice(x,1);
-    // this.treeColumns = this.listHeadersC;
-    // console.log("-----this.treeColumns:",this.treeColumns)
+   
     this.treegrid.refreshColumns();
   }
   actionComplete(args: EditEventArgs) {
@@ -744,54 +708,12 @@ public progressM: CheckBoxComponent;
       items[i].setAttribute('style', 'display: none;');
     }
     if (elem.closest('.e-row')) {
-      // if (
-      //   isNullOrUndefined(uid) ||
-      //   isNullOrUndefined(
-      //     getValue(
-      //       'hasChildRecords',
-      //       this.treegrid.grid.getRowObjectFromUID(uid).data
-      //     )
-      //   )
-      // ) 
-      // {
-      //   arg.cancel = true;
-      // } 
-      // else {
-      // let flag: boolean = getValue(
-      //   'expanded',
-      //   this.treegrid.grid.getRowObjectFromUID(uid).data
-      // );
-      document
-        .querySelectorAll('li#rndeDialog')[0]
-        .setAttribute('style', 'display: block;');
-      document
-        .querySelectorAll('li#rndeRow')[0]
-        .setAttribute('style', 'display: block;');
-      document
-        .querySelectorAll('li#rmultiSelect')[0]
-        .setAttribute('style', 'display: block;');
-      document
-        .querySelectorAll('li#rcopy')[0]
-        .setAttribute('style', 'display: block;');
-
-      document
-        .querySelectorAll('li#cut')[0]
-        .setAttribute('style', 'display: block;');
-      document
-        .querySelectorAll('li#rsibling')[0]
-        .setAttribute('style', 'display: block;');
-
-      document
-        .querySelectorAll('li#rchild')[0]
-        .setAttribute('style', 'display: block;');
-      // }
-    } else {
+      
+      
+      } else {
       let len =
         this.treegrid.element.querySelectorAll('.e-treegridexpand').length;
       if (len !== 0) {
-        // document
-        //   .querySelectorAll('li#style')[0]
-        //   .setAttribute('style', 'display: block;');
         document
           .querySelectorAll('li#deleteCol')[0]
           .setAttribute('style', 'display: block;');
@@ -821,300 +743,11 @@ public progressM: CheckBoxComponent;
     }
   }
 
-  // created(args) {
-  //   document.addEventListener(
-  //     'keydown',
-  //     function (e) {
-  //       if (e.keyCode === 88) {
-  //         this.flag = true;
-  //         for (
-  //           var i = 0;
-  //           i < this.treegrid.getSelectedRowCellIndexes()[0].cellIndexes.length;
-  //           i++
-  //         ) {
-  //           this.fieldData.push(
-  //             this.treegrid.getColumnByIndex(
-  //               this.treegrid.getSelectedRowCellIndexes()[0].cellIndexes[i]
-  //             ).field
-  //           );
-  //         }
-  //         this.cutIndex = this.treegrid.getSelectedRowCellIndexes();
-  //         this.treegrid.copy();
-  //       }
-  //     }.bind(this)
-  //   );
-  // }
-  // beforePaste(args) {
-  //   if (this.flag == true) {
-  //     for (var i = 0; i < this.cutIndex.length; i++) {
-  //       var rowInfo = this.treegrid.getRowInfo(
-  //         this.treegrid.getRowByIndex(this.cutIndex[i].rowIndex)
-  //       );
-  //       for (var j = 0; j < this.fieldData.length; j++) {
-  //         if (rowInfo.rowData[this.fieldData[j]] != '') {
-  //           this.treegrid.updateCell(
-  //             this.cutIndex[i].rowIndex,
-  //             this.fieldData[j],
-  //             ''
-  //           );
-  //         }
-  //       }
-  //     }
-  //   }
-  // }
   contextMenuClick(args): void {
-    // this.MultiSelect = true;
-    if (args.item.text == 'Cut') {
-      this.flag = true;
-      // for (
-      //   var i = 0;
-      //   i < this.treegrid.getSelectedRowCellIndexes()[0].cellIndexes.length;
-      //   i++
-      // ) {
-      //   this.fieldData.push(
-      //     this.treegrid.getColumnByIndex(
-      //       this.treegrid.getSelectedRowCellIndexes()[0].cellIndexes[i]
-      //     ).field
-      //   );
-      // }
-      // this.cutIndex = this.treegrid.getSelectedRowCellIndexes();
-      // this.treegrid.copyHierarchyMode = 'None';
-      // this.treegrid.copy();
-      this.cutRow = this.treegrid.getRowByIndex(this.rowIndex);
-      this.cutRowBool = true;
-      this.treegrid.copyHierarchyMode = 'None';
-      this.treegrid.copy();
-      this.cutRow.setAttribute('style', 'background:#FFC0CB;');
-    }
-    if (args.item.id == 'rsibling') {
-      if (this.cutRowBool == true) {
-        var copyContent = this.treegrid.clipboardModule.copyContent;
-
-        // this.treegrid.paste(copyContent, rowIndex);
-
-        var stringArray = copyContent.split('\t');
-        let newRecord: Treerow = new Treerow(
-          stringArray[0],
-          stringArray[1],
-          stringArray[2],
-          stringArray[3],
-          stringArray[4],
-          stringArray[5],
-          stringArray[6],
-          this.selectedRow.data.ParentItem
-        );
-        newRecord.children = [];
-        newRecord.isParent = true;
-        newRecord.id = uuidv4();
-        const body = {
-          TaskID: newRecord.TaskID,
-          TaskName: newRecord.TaskName,
-          StartDate: newRecord.StartDate,
-          EndDate: newRecord.EndDate,
-          Duration: newRecord.Duration,
-          Progress: newRecord.Progress,
-          Priority: newRecord.Priority,
-          isParent: newRecord.isParent,
-          ParentItem: newRecord.ParentItem,
-        };
-        this.http
-          .delete<any>(
-            `https://vom-app.herokuapp.com/tasks/${newRecord.TaskID}`
-          )
-          .subscribe((data) => {
-            console.log('post:------------------', data);
-            this.treegrid.refresh();
-            this.dataManager
-              .executeQuery(new Query())
-              .then(
-                (e: ReturnOption) => (this.data = e.result.data as object[])
-              )
-              .catch((e) => true);
-          });
-        this.http
-          .post<any>('https://vom-app.herokuapp.com/tasks', body)
-          .subscribe((data) => {
-            this.dataManager
-              .executeQuery(new Query())
-              .then(
-                (e: ReturnOption) => (this.data = e.result.data as object[])
-              )
-              .catch((e) => true);
-          });
-
-        // this.treegrid.addRecord(newRecord, 0, 'Above');
-
-        this.cutRowBool = false;
-        this.copiedRow.setAttribute('style', 'background:white;');
-      } else {
-        var copyContent = this.treegrid.clipboardModule.copyContent;
-
-        // this.treegrid.paste(copyContent, rowIndex);
-
-        var stringArray = copyContent.split('\t');
-        let newRecord: Treerow = new Treerow(
-          stringArray[0],
-          stringArray[1],
-          stringArray[2],
-          stringArray[3],
-          stringArray[4],
-          stringArray[5],
-          stringArray[6],
-          this.selectedRow.data.ParentItem
-        );
-        newRecord.children = [];
-        newRecord.isParent = true;
-        newRecord.id = uuidv4();
-        const body = {
-          TaskID: newRecord.TaskID,
-          TaskName: newRecord.TaskName,
-          StartDate: newRecord.StartDate,
-          EndDate: newRecord.EndDate,
-          Duration: newRecord.Duration,
-          Progress: newRecord.Progress,
-          Priority: newRecord.Priority,
-          isParent: newRecord.isParent,
-          ParentItem: newRecord.ParentItem,
-        };
-
-        this.http
-          .post<any>('https://vom-app.herokuapp.com/tasks', body)
-          .subscribe((data) => {
-            console.log('post:------------------', data);
-            this.dataManager
-              .executeQuery(new Query())
-              .then(
-                (e: ReturnOption) => (this.data = e.result.data as object[])
-              )
-              .catch((e) => true);
-          });
-        this.dataManager
-          .executeQuery(new Query())
-          .then((e: ReturnOption) => (this.data = e.result.data as object[]))
-          .catch((e) => true);
-        // this.treegrid.addRecord(newRecord, 0, 'Above');
-
-        this.copiedRow.setAttribute('style', 'background:white;');
-      }
-    }
-
-    if (args.item.id == 'rchild') {
-      if (this.cutRowBool == true) {
-        var copyContent = this.treegrid.clipboardModule.copyContent;
-
-        // this.treegrid.paste(copyContent, rowIndex);
-
-        var stringArray = copyContent.split('\t');
-        let newRecord: Treerow = new Treerow(
-          stringArray[0],
-          stringArray[1],
-          stringArray[2],
-          stringArray[3],
-          stringArray[4],
-          stringArray[5],
-          stringArray[6],
-          this.selectedRow.data.TaskID
-        );
-        newRecord.children = [];
-        newRecord.isParent = true;
-        newRecord.id = uuidv4();
-        const body = {
-          TaskID: newRecord.TaskID,
-          TaskName: newRecord.TaskName,
-          StartDate: newRecord.StartDate,
-          EndDate: newRecord.EndDate,
-          Duration: newRecord.Duration,
-          Progress: newRecord.Progress,
-          Priority: newRecord.Priority,
-          isParent: newRecord.isParent,
-          ParentItem: newRecord.ParentItem,
-        };
-        this.http
-          .delete<any>(
-            `https://vom-app.herokuapp.com/tasks/${newRecord.TaskID}`
-          )
-          .subscribe((data) => {
-            console.log('post:------------------', data);
-            this.treegrid.refresh();
-            this.http
-              .post<any>('https://vom-app.herokuapp.com/tasks', body)
-              .subscribe((data) => {
-                this.dataManager
-                  .executeQuery(new Query())
-                  .then(
-                    (e: ReturnOption) => (this.data = e.result.data as object[])
-                  )
-                  .catch((e) => true);
-              });
-          });
-
-        // this.treegrid.addRecord(newRecord, 0, 'Above');
-
-        this.cutRowBool = false;
-        this.copiedRow.setAttribute('style', 'background:white;');
-      } else {
-        var copyContent = this.treegrid.clipboardModule.copyContent;
-        var stringArray = copyContent.split('\t');
-        let newRecord: Treerow = new Treerow(
-          stringArray[0],
-          stringArray[1],
-          stringArray[2],
-          stringArray[3],
-          stringArray[4],
-          stringArray[5],
-          stringArray[6],
-          this.selectedRow.data.TaskID
-        );
-        newRecord.children = [];
-        newRecord.isParent = false;
-        newRecord.id = uuidv4();
-        const body = {
-          TaskID: newRecord.TaskID,
-          TaskName: newRecord.TaskName,
-          StartDate: newRecord.StartDate,
-          EndDate: newRecord.EndDate,
-          Duration: newRecord.Duration,
-          Progress: newRecord.Progress,
-          Priority: newRecord.Priority,
-          isParent: newRecord.isParent,
-          ParentItem: newRecord.ParentItem,
-        };
-
-        this.http
-          .post<any>('https://vom-app.herokuapp.com/tasks', body)
-          .subscribe((data) => {
-            console.log('post:------------------', data);
-            this.dataManager
-            .executeQuery(new Query())
-            .then((e: ReturnOption) => (this.data = e.result.data as object[]))
-            .catch((e) => true);
-          });
-       
-        // this.treegrid.addRecord(newRecord, this.selectedRow.row.rowIndex,'Child');
-        this.copiedRow.setAttribute('style', 'background:white;');
-      }
-    } else if (args.item.id === 'deleteCol') {
+    if (args.item.id === 'deleteCol') {
       this.deleteColumnX();
-    } else if (args.item.id === 'rndeDialog') {
-      this.editSettings = {
-        allowEditing: true,
-        allowAdding: true,
-        allowDeleting: true,
-        mode: 'Dialog',
-        newRowPosition: 'Below',
-      };
-      this.toolbar = ['Add', 'Edit', 'Delete'];
-    } else if (args.item.id === 'rndeRow') {
-      this.editSettings = {
-        allowEditing: true,
-        allowAdding: true,
-        allowDeleting: true,
-        mode: 'Row',
-      };
-      this.toolbar = ['Add', 'Edit', 'Delete', 'Update'];
-    } else if (args.item.id === 'rmultiSelect') {
-      this.MultiSelect = true;
-    } else if (args.item.id === 'editCol') {
+    }
+    else if (args.item.id === 'editCol') {
       this.checkNewEdit = 'edit';
       this.showEditColumn = true;
       this.getCurrentField();
@@ -1123,9 +756,6 @@ public progressM: CheckBoxComponent;
       this.showEditColumn = true;
       this.getCurrentField();
     }
-    // else if (args.item.id === 'style') {
-    //   this.Properties = !this.Properties;
-    // }
     else if (args.item.id === 'columnChooser') {
       this.showChooser = !this.showChooser;
     } else if (args.item.id === 'multiSort') {
